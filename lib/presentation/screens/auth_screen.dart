@@ -33,7 +33,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 ),
 
                 SizedBox(
-                  height: 30,
+                  height: 20,
                 ),
 
                 Center(
@@ -61,7 +61,7 @@ class _AuthScreenState extends State<AuthScreen> {
           ),
 
           SizedBox(
-            height: 30,
+            height: 25,
           ),
 
           Expanded(
