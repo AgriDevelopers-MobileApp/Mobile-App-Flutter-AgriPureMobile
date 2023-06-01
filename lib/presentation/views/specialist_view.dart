@@ -17,7 +17,7 @@ class _SpecialistViewState extends State<SpecialistView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Do you want to contact an expert?",
+              Text("Do you want to contact an specialist?",
                 style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
