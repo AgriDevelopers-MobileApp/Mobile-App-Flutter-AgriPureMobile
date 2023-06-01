@@ -5,7 +5,6 @@ import '../../models/plant_model.dart';
 class PlantDetailView extends StatelessWidget {
 
   Plant plant;
-
   PlantDetailView({required this.plant});
 
   @override
@@ -35,7 +34,7 @@ class PlantDetailView extends StatelessWidget {
       body: ListView(
         children: [
           Padding(
-            padding: const EdgeInsets.all(15.0),
+            padding: const EdgeInsets.all(20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -51,18 +50,18 @@ class PlantDetailView extends StatelessWidget {
 
                 Text('Scientifist Name: ${plant.scientifist_name}', style: TextStyle(
                     color: Colors.white,
-                    fontSize: 24,
+                    fontSize: 18,
                     fontWeight: FontWeight.w300,
                     fontFamily: "Montserrat"
                 ),),
 
                 SizedBox(
-                  height: 26,
+                  height: 10,
                 ),
 
                 Text('Variety: ${plant.variety}', style: TextStyle(
                     color: Colors.white,
-                    fontSize: 24,
+                    fontSize: 18,
                     fontWeight: FontWeight.w300
                 ),),
 
@@ -79,7 +78,7 @@ class PlantDetailView extends StatelessWidget {
                 ),
 
                 SizedBox(
-                  height: 26,
+                  height: 20,
                 ),
 
                 Text('Planting information:', style: TextStyle(
@@ -92,48 +91,48 @@ class PlantDetailView extends StatelessWidget {
                   height: 12,
                 ),
 
-                Text('Distance between: ${plant.distance_between} cm', style: TextStyle(
+                Text('Distance between: ${plant.distance_between}', style: TextStyle(
                     color: Colors.white,
-                    fontSize: 24,
+                    fontSize: 18,
                     fontWeight: FontWeight.w300,
                     fontFamily: "Montserrat"
                 ),),
 
                 SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
 
-                Text('Depth: ${plant.depth} cm', style: TextStyle(
+                Text('Depth: ${plant.depth}', style: TextStyle(
                     color: Colors.white,
-                    fontSize: 24,
+                    fontSize: 18,
                     fontWeight: FontWeight.w300,
                     fontFamily: "Montserrat"
                 ),),
 
                 SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
 
                 Text('Fertilization interval: ${plant.intervale_fert} days', style: TextStyle(
                     color: Colors.white,
-                    fontSize: 24,
+                    fontSize: 18,
                     fontWeight: FontWeight.w300,
                     fontFamily: "Montserrat"
                 ),),
 
                 SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
 
                 Text('Fumigation interval: ${plant.intervale_fumig} days', style: TextStyle(
                     color: Colors.white,
-                    fontSize: 24,
+                    fontSize: 18,
                     fontWeight: FontWeight.w300,
                     fontFamily: "Montserrat"
                 ),),
 
                 SizedBox(
-                  height: 26,
+                  height: 25,
                 ),
 
                 Text('Extra information:', style: TextStyle(
@@ -146,66 +145,89 @@ class PlantDetailView extends StatelessWidget {
                   height: 26,
                 ),
 
-                Text('Plant distance between plants:', style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500
-                ),),
+                ExpansionTile(
+                  title: Text('Plant distance between plants:', style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500
+                  ),),
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Text('${plant.info_distance_between}', style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w300
+                      ),),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 26,
+                ),
 
-                Text('${plant.info_distance_between}', style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w300
-                ),),
+
+                ExpansionTile(
+                  title: Text('Land type:', style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500
+                  ),),
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Text('${plant.info_land_type}', style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w300
+                      ),),
+                    ),
+                  ],
+                ),
 
                 SizedBox(
                   height: 26,
                 ),
 
-                Text('Land type:', style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500
-                ),),
-
-                Text('${plant.info_land_type}', style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w300
-                ),),
+                ExpansionTile(
+                  title: Text('Ideal depth for planting:', style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500
+                  ),),
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Text('${plant.info_ideal_depth}', style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w300
+                      ),),
+                    ),
+                  ],
+                ),
 
                 SizedBox(
                   height: 26,
                 ),
 
-                Text('Ideal depth for planting:', style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500
-                ),),
-
-                Text('${plant.info_ideal_depth}', style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w300
-                ),),
-
-                SizedBox(
-                  height: 26,
+                ExpansionTile(
+                  title: Text('Fertilization and fumigation:', style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500
+                  ),),
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Text('${plant.info_fert_fumig}', style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w300
+                      ),),
+                    ),
+                  ],
                 ),
-
-                Text('Fertilization and fumigation:', style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500
-                ),),
-
-                Text('${plant.info_fert_fumig}', style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w300
-                ),),
-
               ],
             ),
           ),

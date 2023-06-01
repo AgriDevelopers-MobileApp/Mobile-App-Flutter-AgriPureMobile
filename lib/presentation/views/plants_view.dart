@@ -87,7 +87,7 @@ class _PlantsViewState extends State<PlantsView> {
                               var plant = snapshot.data![index];
 
                               return Padding(
-                                padding: const EdgeInsets.all(12.0),
+                                padding: const EdgeInsets.all(20.0),
                                 child: Container(
                                     decoration: BoxDecoration(
                                       color: Colors.green,
@@ -106,7 +106,7 @@ class _PlantsViewState extends State<PlantsView> {
                                           ),
 
                                           SizedBox(
-                                            height: 20,
+                                            height:  10,
                                           ),
 
                                           Text("${plant.name}", style: TextStyle(
@@ -116,26 +116,32 @@ class _PlantsViewState extends State<PlantsView> {
                                           ),),
 
                                           SizedBox(
-                                            height: 20,
+                                            height: 10,
                                           ),
 
-                                          ElevatedButton(
-                                            onPressed: (){
-                                              Navigator.push(context, MaterialPageRoute(
-                                                  builder: (context) => PlantDetailView(plant: plant)
-                                              ));
-                                            },
-                                            style: ElevatedButton.styleFrom(
-                                              backgroundColor: Colors.orange, // Establecer el fondo anaranjado
-                                            ),
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(12.0),
-                                              child: Text("Details", style: TextStyle(
-                                                  fontSize: 18,
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold
-                                              ),),
-                                            ),
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                child: ElevatedButton(
+                                                  onPressed: (){
+                                                    Navigator.push(context, MaterialPageRoute(
+                                                        builder: (context) => PlantDetailView(plant: plant)
+                                                    ));
+                                                  },
+                                                  style: ElevatedButton.styleFrom(
+                                                    backgroundColor: Colors.orange, // Establecer el fondo anaranjado
+                                                  ),
+                                                  child: Padding(
+                                                    padding: const EdgeInsets.all(12.0),
+                                                    child: Text("Details", style: TextStyle(
+                                                        fontSize: 18,
+                                                        color: Colors.white,
+                                                        fontWeight: FontWeight.bold
+                                                    ),),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           )
 
                                         ],
@@ -145,7 +151,7 @@ class _PlantsViewState extends State<PlantsView> {
                               );
                             } else {
                               return Padding(
-                                padding: const EdgeInsets.all(12.0),
+                                padding: const EdgeInsets.all(20.0),
                                 child: Container(
                                   height: 250,
                                   decoration: BoxDecoration(

@@ -34,7 +34,7 @@ class _SettingsViewState extends State<SettingsView> {
             Container(
               margin: EdgeInsets.symmetric(vertical: 10), // Ajuste del margen vertical
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center, // Centrar el texto
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ExpansionTile(
                     title: Text(

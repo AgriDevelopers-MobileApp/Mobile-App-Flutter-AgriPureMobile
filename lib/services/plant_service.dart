@@ -1,18 +1,21 @@
 import 'dart:convert';
 import 'package:agripure_mobile/models/plant_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PlantService {
   static Future<List<Plant>> getPlants() async {
     var url = Uri.parse('https://agripure-mobile-service.onrender.com/api/plants');
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
     Map<String, String> headers = {
       "Accept": "application/json",
       "Content-Type": "application/json",
+      "Authorization": 'Bearer $token'
     };
 
     List<Plant> plantsList = [];
 
-    /*
     final response = await http.get(url, headers: headers);
 
     if (response.statusCode == 200) {
@@ -24,9 +27,8 @@ class PlantService {
 
       return plantsList;
     }
-    */
 
-    plantsList.add(
+    /*plantsList.add(
         Plant(
           id: 1,
           name: "Cauliflower",
@@ -60,7 +62,7 @@ class PlantService {
             intervale_fert: 10,
             intervale_fumig: 10
         )
-    );
+    );*/
 
     return plantsList;
   }
