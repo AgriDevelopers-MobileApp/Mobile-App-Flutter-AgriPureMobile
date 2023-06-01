@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:agripure_mobile/services/auth_service.dart';
 
 class SettingsView extends StatefulWidget {
   const SettingsView({Key? key}) : super(key: key);
@@ -315,7 +316,9 @@ class _SettingsViewState extends State<SettingsView> {
             Expanded(
               child: GestureDetector(
                 onTap: () {
-                  // Acciones al hacer clic en "Sign Off"
+                  AuthService.logOut().then((_) => {
+                    Navigator.pushReplacementNamed(context, '/auth')
+                  });
                 },
                 child: Container(
                   margin: EdgeInsets.only(top: 20), // Ajuste del margen superior

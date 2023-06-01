@@ -24,9 +24,9 @@ class _AuthScreenState extends State<AuthScreen> {
           SafeArea(
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 30),
-                  child: const Row(
+                const Padding(
+                  padding: EdgeInsets.only(top: 30),
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [

@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen>{
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CircleAvatar(
-                backgroundImage: const AssetImage('assets/images/logo_agripure.png'),
+                backgroundImage: AssetImage('assets/images/logo_agripure.png'),
                 radius: 100,
             ),
 
