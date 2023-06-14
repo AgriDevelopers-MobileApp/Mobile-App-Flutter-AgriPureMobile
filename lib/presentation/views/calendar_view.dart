@@ -18,9 +18,6 @@ class _CalendarViewState extends State<CalendarView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: Color.fromRGBO(40, 40, 40, 1.0),
-      appBar: AppBar(title: Text("Good Morning User. ")),
-
       body: contend(),
     );
   }
@@ -33,8 +30,6 @@ class _CalendarViewState extends State<CalendarView> {
 
         children: [
           Text("SELECTED DAY " +today.toString().split(" ")[0]),
-
-
 
           Container(
 

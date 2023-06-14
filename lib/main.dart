@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
       title: 'AgriPure App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
         useMaterial3: true,
       ),
       //home: initialScreen,
