@@ -66,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
               icon: Icon(Icons.linked_camera_outlined),
               activeIcon: Icon(Icons.linked_camera),
-              label: "Settings",
+              label: "Identify",
               backgroundColor: Colors.green
           ),
 
