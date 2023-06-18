@@ -38,7 +38,7 @@ class SpecialistDetailView extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Basic information:', style: TextStyle(
+                  Text('Description:', style: TextStyle(
                       color: Colors.white,
                       fontSize: 24,
                       fontWeight: FontWeight.bold
@@ -48,7 +48,7 @@ class SpecialistDetailView extends StatelessWidget {
                     height: 12,
                   ),
 
-                  Text('Specialist description: ${specialist.description_specialist}', style: TextStyle(
+                  Text('${specialist.description}', style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
                       fontWeight: FontWeight.w300,
@@ -59,20 +59,23 @@ class SpecialistDetailView extends StatelessWidget {
                     height: 10,
                   ),
 
+                  SizedBox(
+                    height: 26,
+                  ),
 
-                  ClipRRect(
+                  /*ClipRRect(
                       borderRadius: BorderRadius.circular(15),
                       child: Image.network('${specialist.image}',
                         width: double.infinity,
                         height: 200,
                         fit: BoxFit.cover,)
-                  ),
+                  ),*/
 
                   SizedBox(
                     height: 20,
                   ),
 
-                  Text('Specialist information:', style: TextStyle(
+                  Text('Contact information:', style: TextStyle(
                       color: Colors.white,
                       fontSize: 24,
                       fontWeight: FontWeight.bold
@@ -82,7 +85,7 @@ class SpecialistDetailView extends StatelessWidget {
                     height: 12,
                   ),
 
-                  Text('Favorite plants: ${specialist.info_favorite_plants}', style: TextStyle(
+                  Text('Telephone number: ${specialist.telephone_number}', style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
                       fontWeight: FontWeight.w300,
@@ -93,7 +96,7 @@ class SpecialistDetailView extends StatelessWidget {
                     height: 10,
                   ),
 
-                  Text('Experience: ${specialist.info_experience}', style: TextStyle(
+                  Text('Whatsapp Number: ${specialist.whatsapp_number}', style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
                       fontWeight: FontWeight.w300,
@@ -104,7 +107,7 @@ class SpecialistDetailView extends StatelessWidget {
                     height: 10,
                   ),
 
-                  Text('Certification: ${specialist.info_certifications} days', style: TextStyle(
+                  Text('Email: ${specialist.contact_email}', style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
                       fontWeight: FontWeight.w300,
@@ -113,6 +116,82 @@ class SpecialistDetailView extends StatelessWidget {
 
                   SizedBox(
                     height: 10,
+                  ),
+
+                  Text('Extra information:', style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold
+                  ),),
+
+                  SizedBox(
+                    height: 26,
+                  ),
+
+                  ExpansionTile(
+                    title: Text('Favorite plants:', style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500
+                    ),),
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Text('${specialist.info_favorite_plants}', style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w300
+                        ),),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 26,
+                  ),
+
+
+                  ExpansionTile(
+                    title: Text('Certifications:', style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500
+                    ),),
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Text('${specialist.info_certifications}', style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w300
+                        ),),
+                      ),
+                    ],
+                  ),
+
+                  SizedBox(
+                    height: 26,
+                  ),
+
+                  ExpansionTile(
+                    title: Text('Experience:', style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500
+                    ),),
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Text('${specialist.info_experience}', style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w300
+                        ),),
+                      ),
+                    ],
+                  ),
+
+                  SizedBox(
+                    height: 26,
                   ),
 
                 ],

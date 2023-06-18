@@ -97,7 +97,7 @@ class _SpecialistViewState extends State<SpecialistView> {
                                       padding: const EdgeInsets.all(12.0),
                                       child: Column(
                                         children: [
-                                          ClipRRect(
+                                          /*ClipRRect(
                                               borderRadius: BorderRadius.circular(15),
                                               child: Image.network('${specialist.image}',
                                                 width: double.infinity,
@@ -107,7 +107,7 @@ class _SpecialistViewState extends State<SpecialistView> {
 
                                           SizedBox(
                                             height:  10,
-                                          ),
+                                          ),*/
 
                                           Text("${specialist.name}", style: TextStyle(
                                               color: Colors.white,
@@ -153,10 +153,20 @@ class _SpecialistViewState extends State<SpecialistView> {
                               return Padding(
                                 padding: const EdgeInsets.all(20.0),
                                 child: Container(
-                                  height: 250,
+                                  height: 150,
                                   decoration: BoxDecoration(
                                     color: Color(0xFF4D4D4D),
                                     borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      'FIND SPECIALIST',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               );
