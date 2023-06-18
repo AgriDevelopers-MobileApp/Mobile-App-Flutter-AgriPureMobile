@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SpecilistService {
   static Future<List<Specialist>> getSpecilist() async {
-    var url = Uri.parse('https://agripure-mobile-service.onrender.com/api/specialist');
+    var url = Uri.parse('https://agripure-mobile-service.onrender.com/api/specialists');
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
     Map<String, String> headers = {
