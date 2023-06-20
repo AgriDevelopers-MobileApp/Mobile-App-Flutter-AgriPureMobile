@@ -12,15 +12,15 @@ class AuthService{
         "Content-Type": "application/json",
       };
       var response = await http.post(
-        url,
-        headers: headers,
-        body: jsonEncode({
-          'email': email,
-          'name': name,
-          'password': password,
-          'roles': [''],
-          'userName': username
-        })
+          url,
+          headers: headers,
+          body: jsonEncode({
+            'email': email,
+            'name': name,
+            'password': password,
+            'roles': [''],
+            'userName': username
+          })
       );
 
       if(response.statusCode == 200 || response.statusCode == 201){
