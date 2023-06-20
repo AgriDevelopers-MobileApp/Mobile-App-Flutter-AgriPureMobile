@@ -119,7 +119,7 @@ class _LoginViewState extends State<LoginView> {
                             });
 
                             AuthService.logIn(_usernameController.text, _passwordController.text).then((_) =>{
-                              Navigator.push(context,
+                              Navigator.pushReplacement(context,
                                   MaterialPageRoute(builder: (context) => HomeScreen())),
                             }).catchError((error){
                               String errorMessage = "Ocurrió un error durante el inicio de sesión";

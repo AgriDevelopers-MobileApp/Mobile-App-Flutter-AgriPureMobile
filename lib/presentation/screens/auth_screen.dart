@@ -19,17 +19,31 @@ class _AuthScreenState extends State<AuthScreen> {
       backgroundColor: const Color.fromRGBO(40, 40, 40, 1.0),
       body: SafeArea( child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SafeArea(
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 40, left: 20, right: 20, bottom: 10),
-                  child: Text("AgriPure", style: TextStyle(
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white
-                  ),),
+                const Padding(
+                  padding: EdgeInsets.only(top: 30),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      CircleAvatar(
+                        backgroundImage: AssetImage('assets/images/logo_agripure.png'),
+                        radius: 25,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 10),
+                        child: Text("AgriPure", style: TextStyle(
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white
+                        ),),
+                      ),
+                    ],
+                  ),
                 ),
 
                 SizedBox(

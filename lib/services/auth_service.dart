@@ -65,7 +65,11 @@ class AuthService{
       }
     } catch (error) {
       return Future.error('Error on connectivity: ${error}');
-
     }
+  }
+
+  static Future<void> logOut() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove('token');
   }
 }
