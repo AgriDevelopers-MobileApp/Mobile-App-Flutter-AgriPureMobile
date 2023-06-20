@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:agripure_mobile/services/settings_service.dart';
 import 'package:agripure_mobile/services/auth_service.dart';
 
 class SettingsView extends StatefulWidget {
@@ -10,6 +11,24 @@ class SettingsView extends StatefulWidget {
 
 class _SettingsViewState extends State<SettingsView> {
   bool isExpanded = false;
+
+  Future<void> changeEmail(String newEmail, String password) async {
+    try {
+      await AuthService.changeEmail(newEmail, password);
+      // Mostrar una notificación o mensaje de éxito aquí
+    } catch (error) {
+      // Mostrar una notificación o mensaje de error aquí
+    }
+  }
+
+  Future<void> changePassword(String currentPassword, String newPassword) async {
+    try {
+      await AuthService.changePassword(currentPassword, newPassword);
+      // Mostrar una notificación o mensaje de éxito aquí
+    } catch (error) {
+      // Mostrar una notificación o mensaje de error aquí
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +82,9 @@ class _SettingsViewState extends State<SettingsView> {
                             showDialog(
                               context: context,
                               builder: (BuildContext context) {
+                                String newEmail = '';
+                                String password = '';
+
                                 return AlertDialog(
                                   title: Text(
                                     "Change Email",
@@ -97,6 +119,9 @@ class _SettingsViewState extends State<SettingsView> {
                                             fontFamily: 'Montserrat',
                                           ),
                                         ),
+                                        onChanged: (value) {
+                                          newEmail = value;
+                                        },
                                       ),
                                       SizedBox(height: 10),
                                       Text(
@@ -120,13 +145,15 @@ class _SettingsViewState extends State<SettingsView> {
                                           ),
                                         ),
                                         obscureText: true,
+                                        onChanged: (value) {
+                                          password = value;
+                                        },
                                       ),
                                     ],
                                   ),
                                   actions: [
                                     ElevatedButton(
                                       onPressed: () {
-                                        // Acciones al hacer clic en el botón "Change"
                                         Navigator.of(context).pop();
                                       },
                                       style: ElevatedButton.styleFrom(
@@ -140,9 +167,9 @@ class _SettingsViewState extends State<SettingsView> {
                                         ),
                                       ),
                                     ),
-                                    TextButton(
-                                      onPressed: () {
-                                        // Acciones al hacer clic en el botón "Cancel"
+                                    ElevatedButton(
+                                      onPressed: () async {
+                                        await changeEmail(newEmail, password);
                                         Navigator.of(context).pop();
                                       },
                                       style: ElevatedButton.styleFrom(
@@ -174,6 +201,9 @@ class _SettingsViewState extends State<SettingsView> {
                             showDialog(
                               context: context,
                               builder: (BuildContext context) {
+                                String currentPassword = '';
+                                String newPassword = '';
+
                                 return AlertDialog(
                                   title: Text(
                                     "Change Password",
@@ -208,6 +238,10 @@ class _SettingsViewState extends State<SettingsView> {
                                             fontFamily: 'Montserrat',
                                           ),
                                         ),
+                                        obscureText: true,
+                                        onChanged: (value) {
+                                          currentPassword = value;
+                                        },
                                       ),
                                       SizedBox(height: 10),
                                       Text(
@@ -231,6 +265,9 @@ class _SettingsViewState extends State<SettingsView> {
                                           ),
                                         ),
                                         obscureText: true,
+                                        onChanged: (value) {
+                                          newPassword = value;
+                                        },
                                       ),
                                       SizedBox(height: 10),
                                       Text(
@@ -260,7 +297,6 @@ class _SettingsViewState extends State<SettingsView> {
                                   actions: [
                                     ElevatedButton(
                                       onPressed: () {
-                                        // Acciones al hacer clic en el botón "Change"
                                         Navigator.of(context).pop();
                                       },
                                       style: ElevatedButton.styleFrom(
@@ -274,9 +310,9 @@ class _SettingsViewState extends State<SettingsView> {
                                         ),
                                       ),
                                     ),
-                                    TextButton(
-                                      onPressed: () {
-                                        // Acciones al hacer clic en el botón "Cancel"
+                                    ElevatedButton(
+                                      onPressed: () async {
+                                        await changePassword(currentPassword, newPassword);
                                         Navigator.of(context).pop();
                                       },
                                       style: ElevatedButton.styleFrom(
@@ -316,19 +352,68 @@ class _SettingsViewState extends State<SettingsView> {
             Expanded(
               child: GestureDetector(
                 onTap: () {
-                  AuthService.logOut().then((_) => {
-                    Navigator.pushReplacementNamed(context, '/auth')
-                  });
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text(
+                          "Sign Off",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Montserrat',
+                          ),
+                        ),
+                        content: Text(
+                          "¿Está seguro de que desea salir?",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'Montserrat',
+                          ),
+                        ),
+                        backgroundColor: Colors.grey[800],
+                        actions: <Widget>[
+                          TextButton(
+                            child: Text(
+                              "Cancelar",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'Montserrat',
+                              ),
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).pop(); // Cierra el diálogo
+                            },
+                          ),
+                          TextButton(
+                            child: Text(
+                              "Aceptar",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'Montserrat',
+                              ),
+                            ),
+                            onPressed: () {
+                              AuthService.logOut().then((_) => {
+                                Navigator.pushReplacementNamed(context, '/auth')
+                              });
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
                 },
                 child: Container(
-                  margin: EdgeInsets.only(top: 20), // Ajuste del margen superior
+                  margin: EdgeInsets.only(top: 20),
                   child: Text(
                     "Sign Off",
-                    textAlign: TextAlign.center, // Centrar el texto
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
+                      fontFamily: 'Montserrat',
                     ),
                   ),
                 ),
