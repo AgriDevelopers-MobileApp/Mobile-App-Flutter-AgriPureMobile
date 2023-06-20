@@ -1,3 +1,4 @@
+import 'package:agripure_mobile/services/plant_service.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/plant_model.dart';
@@ -26,7 +27,9 @@ class PlantDetailView extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.delete),
             onPressed: () {
-              // Lógica para eliminar aquí
+              PlantService.deletePlant(plant.id!).then((value) =>
+                  Navigator.pop(context, true)
+              );
             },
           ),
         ],
