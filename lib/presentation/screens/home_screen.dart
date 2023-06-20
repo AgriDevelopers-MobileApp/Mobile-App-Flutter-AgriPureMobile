@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("AgriPure, tu asistente agrícola", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),),
+        title: Text("AgriPure, your planting assistant", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),),
         backgroundColor: Colors.green,
         automaticallyImplyLeading: false,),
       backgroundColor: const Color.fromRGBO(40, 40, 40, 1.0),
