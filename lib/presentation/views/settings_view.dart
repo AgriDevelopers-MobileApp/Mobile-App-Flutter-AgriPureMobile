@@ -14,7 +14,7 @@ class _SettingsViewState extends State<SettingsView> {
 
   Future<void> changeEmail(String newEmail, String password) async {
     try {
-      await AuthService.changeEmail(newEmail, password);
+      await SettingsService.changeEmail(newEmail);
       // Mostrar una notificación o mensaje de éxito aquí
     } catch (error) {
       // Mostrar una notificación o mensaje de error aquí
@@ -23,7 +23,7 @@ class _SettingsViewState extends State<SettingsView> {
 
   Future<void> changePassword(String currentPassword, String newPassword) async {
     try {
-      await AuthService.changePassword(currentPassword, newPassword);
+      await SettingsService.changePassword(currentPassword, newPassword);
       // Mostrar una notificación o mensaje de éxito aquí
     } catch (error) {
       // Mostrar una notificación o mensaje de error aquí
@@ -121,32 +121,6 @@ class _SettingsViewState extends State<SettingsView> {
                                         ),
                                         onChanged: (value) {
                                           newEmail = value;
-                                        },
-                                      ),
-                                      SizedBox(height: 10),
-                                      Text(
-                                        "Password",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontFamily: 'Montserrat',
-                                        ),
-                                      ),
-                                      TextField(
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontFamily: 'Montserrat',
-                                        ),
-                                        decoration: InputDecoration(
-                                          fillColor: Colors.white,
-                                          hintText: "Enter your password",
-                                          hintStyle: TextStyle(
-                                            color: Colors.white.withOpacity(0.5),
-                                            fontFamily: 'Montserrat',
-                                          ),
-                                        ),
-                                        obscureText: true,
-                                        onChanged: (value) {
-                                          password = value;
                                         },
                                       ),
                                     ],

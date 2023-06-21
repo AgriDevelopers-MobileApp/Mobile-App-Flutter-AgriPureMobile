@@ -2,12 +2,14 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-class AuthService {
-  static Future<bool> changeEmail(String newEmail, String password) async {
+class SettingsService {
+  static Future<bool> changeEmail(String newEmail) async {
     try {
-      var url = Uri.parse('https://agripure-mobile-service.onrender.com/auth/change_email');
       SharedPreferences prefs = await SharedPreferences.getInstance();
       final token = prefs.getString('token');
+      final String? userName = prefs.getString('userName');
+
+      var url = Uri.parse('https://agripure-mobile-service.onrender.com/api/users/username/$userName');
 
       Map<String, String> headers = {
         "Accept": "application/json",
@@ -15,10 +17,20 @@ class AuthService {
         "Authorization": 'Bearer $token',
       };
 
+      final responseUser = await http.get(url, headers: headers);
+
+      final user = jsonDecode(responseUser.body);
+      final name = user['name'];
+
+      Map<String, String> body = {
+        "email": newEmail,
+        "name": name,
+      };
+
       var response = await http.post(
         url,
         headers: headers,
-        body: jsonEncode({'new_email': newEmail}),
+        body: body,
       );
 
       if (response.statusCode == 200) {
@@ -38,6 +50,8 @@ class AuthService {
     var url = Uri.parse('https://agripure-mobile-service.onrender.com/api/change-password');
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
+    final String? userName = prefs.getString('userName');
+
     Map<String, String> headers = {
       "Accept": "application/json",
       "Content-Type": "application/json",
@@ -45,7 +59,9 @@ class AuthService {
     };
 
     Map<String, String> body = {
-      "password": newPassword,
+      "newPassword": newPassword,
+      "oldPassword": currentPassword,
+      "username": '$userName'
     };
 
     final response = await http.post(url, headers: headers, body: jsonEncode(body));

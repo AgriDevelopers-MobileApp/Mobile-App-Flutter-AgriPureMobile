@@ -44,7 +44,6 @@ class _CalendarViewState extends State<CalendarView> {
               firstDay: DateTime.utc(2021,05,31),
               lastDay: DateTime.utc(2030, 3, 15),
               onDaySelected: _onDaySelected,
-
             ),
 
           ),
