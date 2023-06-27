@@ -1,3 +1,6 @@
+import 'package:agripure_mobile/presentation/views/add_plant_view.dart';
+import 'package:agripure_mobile/presentation/views/plant_detail_view.dart';
+import 'package:agripure_mobile/services/plant_service.dart';
 import 'package:flutter/material.dart';
 
 class PlantsView extends StatefulWidget {
@@ -12,6 +15,20 @@ class _PlantsViewState extends State<PlantsView> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Color.fromRGBO(40, 40, 40, 1.0),
+
+        floatingActionButton: FloatingActionButton(
+          onPressed: () async {
+            var response = await Navigator.push(context,
+                MaterialPageRoute(builder: (context) => AddPlantView()));
+
+            if(response == true) {
+              setState(() {});
+            }
+          },
+          child: Icon(Icons.add, color: Colors.white),
+          backgroundColor: Colors.deepOrange,
+        ),
+
         body: Padding(
           padding: const EdgeInsets.all(12),
           child: Column(
@@ -68,8 +85,119 @@ class _PlantsViewState extends State<PlantsView> {
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),),
+
+              SizedBox(
+                height: 15,
+              ),
+
+              FutureBuilder(
+                  initialData: [],
+                  future:  PlantService.getPlantsByUserName(),
+                  builder: (context, AsyncSnapshot<List> snapshot) {
+                    if (snapshot.data!.isEmpty) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(
+                          child: Text("No plants selected", style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                          ),
+                        ),
+                      );
+                    } else {
+                      return Expanded(
+                        child: ListView.builder(
+                            itemCount: snapshot.data!.length,
+                            itemBuilder: (context, index) {
+                              var plant = snapshot.data![index];
+                              return Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.green,
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(12.0),
+                                      child: Column(
+                                        children: [
+                                          ClipRRect(
+                                              borderRadius: BorderRadius
+                                                  .circular(15),
+                                              child: Image.network(
+                                                '${plant.image}',
+                                                width: double.infinity,
+                                                height: 200,
+                                                fit: BoxFit.cover,)
+                                          ),
+
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+
+                                          Text(
+                                            "${plant.name}", style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 28,
+                                              fontWeight: FontWeight.bold
+                                          ),),
+
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                child: ElevatedButton(
+                                                  onPressed: () async {
+                                                    var response = await Navigator.push(context,
+                                                        MaterialPageRoute(
+                                                            builder: (
+                                                                context) =>
+                                                                PlantDetailView(
+                                                                    plant: plant)
+                                                        ));
+
+                                                    if(response == true) {
+                                                      setState(() {});
+                                                    }
+                                                  },
+                                                  style: ElevatedButton
+                                                      .styleFrom(
+                                                    backgroundColor: Colors
+                                                        .orange, // Establecer el fondo anaranjado
+                                                  ),
+                                                  child: Padding(
+                                                    padding: const EdgeInsets
+                                                        .all(12.0),
+                                                    child: Text("Details",
+                                                      style: TextStyle(
+                                                          fontSize: 18,
+                                                          color: Colors.white,
+                                                          fontWeight: FontWeight
+                                                              .bold
+                                                      ),),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                ),
+                              );
+                            }),
+                      );
+                    }
+                  }
+              )
             ],
           ),
+
         )
     );
   }

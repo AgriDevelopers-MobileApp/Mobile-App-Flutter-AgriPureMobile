@@ -12,15 +12,15 @@ class AuthService{
         "Content-Type": "application/json",
       };
       var response = await http.post(
-        url,
-        headers: headers,
-        body: jsonEncode({
-          'email': email,
-          'name': name,
-          'password': password,
-          'roles': [''],
-          'userName': username
-        })
+          url,
+          headers: headers,
+          body: jsonEncode({
+            'email': email,
+            'name': name,
+            'password': password,
+            'roles': [''],
+            'userName': username
+          })
       );
 
       if(response.statusCode == 200 || response.statusCode == 201){
@@ -65,7 +65,11 @@ class AuthService{
       }
     } catch (error) {
       return Future.error('Error on connectivity: ${error}');
-
     }
+  }
+
+  static Future<void> logOut() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove('token');
   }
 }
