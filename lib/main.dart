@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       bool isTokenExpired = JwtDecoder.isExpired(storedToken!);
 
       if (!isTokenExpired) {
-        initialScreen = const HomeScreen();
+        initialScreen = const HomeScreen(index: 0);
       } else {
         initialScreen = const AuthScreen();
       }
@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => initialScreen,
         '/splash': (context) => const SplashScreen(),
-        '/home': (context) => const HomeScreen(),
+        '/home': (context) => const HomeScreen(index: 0),
         '/auth': (context) => const AuthScreen()
       },
     );

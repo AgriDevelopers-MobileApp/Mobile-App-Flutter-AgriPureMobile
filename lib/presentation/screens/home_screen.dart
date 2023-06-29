@@ -6,20 +6,29 @@ import 'package:agripure_mobile/presentation/views/specialist_view.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  final int index;
+  const HomeScreen({Key? key, required this.index}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<HomeScreen> createState() => _HomeScreenState(index);
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final int index;
+  _HomeScreenState(this.index);
 
   int selectedIndex = 0;
 
   @override
+  void initState(){
+    selectedIndex = index;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
 
-    final screens = [const PlantsView(), const CalendarView(), const SpecialistView(), const IdentificationView(),  const SettingsView()];
+    final screens = [const PlantsView(), const CalendarView(), const IdentificationView(), const SpecialistView(), const SettingsView()];
 
     return Scaffold(
       appBar: AppBar(
@@ -57,16 +66,16 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
 
           BottomNavigationBarItem(
-              icon: Icon(Icons.psychology_alt_outlined),
-              activeIcon: Icon(Icons.psychology_alt),
-              label: "Specialists",
+              icon: Icon(Icons.linked_camera_outlined),
+              activeIcon: Icon(Icons.linked_camera),
+              label: "Identify",
               backgroundColor: Colors.green
           ),
 
           BottomNavigationBarItem(
-              icon: Icon(Icons.linked_camera_outlined),
-              activeIcon: Icon(Icons.linked_camera),
-              label: "Identify",
+              icon: Icon(Icons.psychology_alt_outlined),
+              activeIcon: Icon(Icons.psychology_alt),
+              label: "Specialists",
               backgroundColor: Colors.green
           ),
 
