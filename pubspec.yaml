@@ -42,7 +42,7 @@ dependencies:
   jwt_decoder: ^2.0.1
   table_calendar: ^3.0.9
   image_picker: ^0.8.8
-  calendar_view: ^1.0.3
+  url_launcher: ^6.1.11
 
 dev_dependencies:
   flutter_test:

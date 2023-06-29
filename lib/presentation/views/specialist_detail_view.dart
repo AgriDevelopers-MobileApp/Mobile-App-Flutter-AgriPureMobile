@@ -1,11 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../models/specialist_model.dart';
 
-class SpecialistDetailView extends StatelessWidget {
+class SpecialistDetailView extends StatefulWidget {
+  final Specialist specialist;
+  const SpecialistDetailView({Key? key, required this.specialist}) : super(key: key);
 
-  Specialist specialist;
-  SpecialistDetailView({required this.specialist});
+  @override
+  State<SpecialistDetailView> createState() => _SpecialistDetailViewState(specialist);
+}
+
+class _SpecialistDetailViewState extends State<SpecialistDetailView> {
+  final Specialist specialist;
+  _SpecialistDetailViewState(this.specialist);
+
+  bool _hasCallSupport = false;
+  Future<void>? _launched;
+
+  @override
+  void initState() {
+    super.initState();
+    // Check for phone call support.
+    canLaunchUrl(Uri(scheme: 'tel', path: '123')).then((bool result) {
+      setState(() {
+        _hasCallSupport = result;
+      });
+    });
+  }
+
+  Future<void> _makePhoneCall(String phoneNumber) async {
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber,
+    );
+    await launchUrl(launchUri);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,22 +81,6 @@ class SpecialistDetailView extends StatelessWidget {
                     height: 10,
                   ),
 
-                  SizedBox(
-                    height: 26,
-                  ),
-
-                  /*ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
-                      child: Image.network('${specialist.image}',
-                        width: double.infinity,
-                        height: 200,
-                        fit: BoxFit.cover,)
-                  ),*/
-
-                  SizedBox(
-                    height: 20,
-                  ),
-
                   Text('Contact information:', style: TextStyle(
                       color: Colors.white,
                       fontSize: 24,
@@ -107,7 +121,35 @@ class SpecialistDetailView extends StatelessWidget {
                   ),),
 
                   SizedBox(
-                    height: 10,
+                    height: 20,
+                  ),
+
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 8, right: 8),
+                          child: ElevatedButton(
+                            onPressed:  _hasCallSupport
+                                ? () => setState(() {
+                                        _launched = _makePhoneCall(specialist.whatsapp_number.toString());
+                                  }) : null,
+                            style: ElevatedButton.styleFrom(
+                              foregroundColor: Colors.white,
+                              backgroundColor: Colors.orange,
+                            ),
+                            //child: const Text("Make a call", style: TextStyle(fontSize: 18)),
+                            child: _hasCallSupport
+                                ? const Text('Make phone call')
+                                : const Text('Calling not supported'),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+
+                  SizedBox(
+                    height: 20,
                   ),
 
                   Text('Extra information:', style: TextStyle(
