@@ -11,6 +11,8 @@ class PlantsView extends StatefulWidget {
 }
 
 class _PlantsViewState extends State<PlantsView> {
+  String searchText = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,6 +72,11 @@ class _PlantsViewState extends State<PlantsView> {
                           border: InputBorder.none,
                           hintText: "Ingrese planta a buscar"
                       ),
+                      onChanged: (value) {
+                        setState(() {
+                          searchText = value;
+                        });
+                      },
                     ),
                   ),
                 ),
@@ -94,6 +101,9 @@ class _PlantsViewState extends State<PlantsView> {
                   initialData: [],
                   future:  PlantService.getPlantsByUserName(),
                   builder: (context, AsyncSnapshot<List> snapshot) {
+                    List filteredPlants = snapshot.data!.where((plant) =>
+                      plant.name.toLowerCase().contains(searchText.toLowerCase())).toList();
+
                     if (snapshot.data!.isEmpty) {
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -107,11 +117,24 @@ class _PlantsViewState extends State<PlantsView> {
                         ),
                       );
                     } else {
-                      return Expanded(
+                      if (filteredPlants.isEmpty) {
+                        return Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Center(
+                            child: Text("Plant not found", style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                            ),
+                          ),
+                        );
+                      } else {
+                        return Expanded(
                         child: ListView.builder(
-                            itemCount: snapshot.data!.length,
+                            itemCount: filteredPlants.length,
                             itemBuilder: (context, index) {
-                              var plant = snapshot.data![index];
+                              var plant = filteredPlants[index];
                               return Padding(
                                 padding: const EdgeInsets.all(20.0),
                                 child: Container(
@@ -192,6 +215,7 @@ class _PlantsViewState extends State<PlantsView> {
                               );
                             }),
                       );
+                      }
                     }
                   }
               )
