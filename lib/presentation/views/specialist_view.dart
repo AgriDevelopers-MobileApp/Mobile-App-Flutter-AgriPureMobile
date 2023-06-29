@@ -149,7 +149,7 @@ class _SpecialistViewState extends State<SpecialistView> {
                                     )
                                 ),
                               );
-                            } else {
+                            } /*else {
                               return Padding(
                                 padding: const EdgeInsets.all(20.0),
                                 child: Container(
@@ -160,7 +160,7 @@ class _SpecialistViewState extends State<SpecialistView> {
                                   ),
                                   child: Center(
                                     child: Text(
-                                      'FIND SPECIALIST',
+                                      'NOT AVAILABLE SPECIALISTS',
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 20,
@@ -170,7 +170,7 @@ class _SpecialistViewState extends State<SpecialistView> {
                                   ),
                                 ),
                               );
-                            }
+                            }*/
 
 
                           }),

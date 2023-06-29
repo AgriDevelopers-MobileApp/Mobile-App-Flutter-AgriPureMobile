@@ -22,14 +22,6 @@ class SpecialistDetailView extends StatelessWidget {
               fontWeight: FontWeight.bold,
               fontSize: 24
           ),),
-          actions: [
-            IconButton(
-              icon: Icon(Icons.delete),
-              onPressed: () {
-                // Lógica para eliminar aquí
-              },
-            ),
-          ],
         ),
         body: ListView(
           children: [
