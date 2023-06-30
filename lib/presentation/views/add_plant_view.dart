@@ -82,8 +82,8 @@ class _AddPlantViewState extends State<AddPlantView> {
                   List filteredPlants = snapshot.data!.where((plant) =>
                       plant.name.toLowerCase().contains(searchText.toLowerCase())).toList();
                   if (snapshot.data!.isEmpty) {
-                    return Padding(
-                      padding: const EdgeInsets.all(20.0),
+                    return const Padding(
+                      padding: EdgeInsets.all(20.0),
                       child: Center(
                         child: Text("All plants selected", style: TextStyle(
                           fontSize: 18,
@@ -94,9 +94,9 @@ class _AddPlantViewState extends State<AddPlantView> {
                     ),
                   );
                   } else {
-                    if (filteredPlants.isEmpty)
-                        return Padding(
-                          padding: const EdgeInsets.all(20.0),
+                    if (filteredPlants.isEmpty) {
+                      return const Padding(
+                          padding: EdgeInsets.all(20.0),
                           child: Center(
                             child: Text("Plant not found", style: TextStyle(
                               fontSize: 18,
@@ -106,7 +106,8 @@ class _AddPlantViewState extends State<AddPlantView> {
                             ),
                           ),
                         );
-                    else return Expanded(
+                    } else {
+                      return Expanded(
                       child: ListView.builder(
                           itemCount: filteredPlants.length,
                           itemBuilder: (context, index) {
@@ -133,17 +134,17 @@ class _AddPlantViewState extends State<AddPlantView> {
                                               fit: BoxFit.cover,)
                                         ),
 
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 10,
                                         ),
 
-                                        Text("${plant.name}", style: TextStyle(
+                                        Text("${plant.name}", style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 28,
                                             fontWeight: FontWeight.bold
                                         ),),
 
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 10,
                                         ),
 
@@ -188,13 +189,13 @@ class _AddPlantViewState extends State<AddPlantView> {
                                                     ? Container(
                                                     height: 20,
                                                     width: 20,
-                                                    child: CircularProgressIndicator(
+                                                    child: const CircularProgressIndicator(
                                                       valueColor: AlwaysStoppedAnimation<
                                                           Color>(Colors.white),
                                                       strokeWidth: 3.0,
                                                     )
-                                                ) : Padding(
-                                                  padding: const EdgeInsets.all(
+                                                ) : const Padding(
+                                                  padding: EdgeInsets.all(
                                                       12.0),
                                                   child: Text(
                                                     "Add", style: TextStyle(
@@ -215,6 +216,7 @@ class _AddPlantViewState extends State<AddPlantView> {
                             );
                           }),
                     );
+                    }
                   }
                 }
             )

@@ -25,7 +25,7 @@ class _AuthScreenState extends State<AuthScreen> {
             child: Column(
               children: [
                 const Padding(
-                  padding: EdgeInsets.only(top: 30),
+                  padding: EdgeInsets.only(top: 60),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -47,7 +47,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 ),
 
                 SizedBox(
-                  height: 20,
+                  height: 40,
                 ),
 
                 Center(
@@ -75,11 +75,11 @@ class _AuthScreenState extends State<AuthScreen> {
           ),
 
           SizedBox(
-            height: 25,
+            height: 30,
           ),
 
           Expanded(
-            child: _isSignIn ? SignInView() : LoginView(),
+            child: _isSignIn ? const SignInView() : const LoginView(),
           )
 
         ],
