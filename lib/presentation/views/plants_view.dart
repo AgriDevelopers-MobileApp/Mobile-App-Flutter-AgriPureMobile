@@ -2,6 +2,7 @@ import 'package:agripure_mobile/presentation/views/add_plant_view.dart';
 import 'package:agripure_mobile/presentation/views/plant_detail_view.dart';
 import 'package:agripure_mobile/services/plant_service.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PlantsView extends StatefulWidget {
   const PlantsView({Key? key}) : super(key: key);
@@ -13,8 +14,24 @@ class PlantsView extends StatefulWidget {
 class _PlantsViewState extends State<PlantsView> {
   String searchText = '';
 
+  Future<String> obtenerSaludo() async {
+    var horaActual = DateTime.now().hour;
+    String saludo;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String userName = prefs.getString('userName')?? "Invitado";
+    if(horaActual >= 0 && horaActual < 12){
+      saludo = "Good Morning $userName";
+    } else if(horaActual >=12 && horaActual < 18){
+      saludo = "Good Afternoon $userName";
+    } else {
+      saludo = "Good Night $userName";
+    }
+    return saludo;
+  }
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         backgroundColor: Color.fromRGBO(40, 40, 40, 1.0),
 
@@ -36,12 +53,18 @@ class _PlantsViewState extends State<PlantsView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Good Morning",
-                style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white
-                ),
+              FutureBuilder<String>(
+                  future: obtenerSaludo(),
+                  builder: (BuildContext context, AsyncSnapshot<String> snapshot){
+                    String saludo = snapshot.data ?? "";
+                    return Text(saludo,
+                      style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white
+                      ),
+                    );
+                  }
               ),
               SizedBox(
                 height: 15,
@@ -103,7 +126,6 @@ class _PlantsViewState extends State<PlantsView> {
                   builder: (context, AsyncSnapshot<List> snapshot) {
                     List filteredPlants = snapshot.data!.where((plant) =>
                       plant.name.toLowerCase().contains(searchText.toLowerCase())).toList();
-
                     if (snapshot.data!.isEmpty) {
                       return Padding(
                         padding: const EdgeInsets.all(8.0),

@@ -202,68 +202,6 @@ class _SignInViewState extends State<SignInView> {
                       ),
                     ],
                   ),
-
-                  SizedBox(
-                    height: 8,
-                  ),
-
-                  Center(
-                    child: Text("or with",
-                      style: TextStyle(
-                          color: const Color.fromRGBO(100, 100, 100, 1.0),
-                          fontSize: 15
-                      ),
-                    ),
-                  ),
-
-                  SizedBox(
-                    height: 8,
-                  ),
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 5, right: 5),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(backgroundColor: const Color.fromRGBO(40, 58, 176, 1.0)),
-                          onPressed: (){
-
-                          },
-                          child: Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: Icon(Icons.facebook, color: Colors.white,)
-                          ),
-                        ),
-                      ),
-
-                      Padding(
-                        padding: const EdgeInsets.only(left: 5, right: 5),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(backgroundColor: const Color.fromRGBO(0, 0, 0, 1.0)),
-                          onPressed: (){},
-                          child: Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: Icon(Icons.apple, color: Colors.white,)
-                          ),
-                        ),
-                      ),
-
-                      Padding(
-                        padding: const EdgeInsets.only(left: 5, right: 5),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(backgroundColor: const Color.fromRGBO(
-                              255, 0, 0, 1.0)),
-                          onPressed: (){},
-                          child: Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: Icon(Icons.g_mobiledata, color: Colors.white,)
-                          ),
-                        ),
-                      ),
-                    ],
-                  )
-
                 ],
               ),
             )

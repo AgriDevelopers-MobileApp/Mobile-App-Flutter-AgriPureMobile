@@ -140,8 +140,47 @@ class _SpecialistDetailViewState extends State<SpecialistDetailView> {
                             ),
                             //child: const Text("Make a call", style: TextStyle(fontSize: 18)),
                             child: _hasCallSupport
-                                ? const Text('Make phone call')
-                                : const Text('Calling not supported'),
+                                ? const Text('Make phone call', style: TextStyle(fontSize: 18))
+                                : const Text('Calling not supported', style: TextStyle(fontSize: 18)),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 8, right: 8),
+                          child: ElevatedButton(
+                            onPressed: () async{
+                              String? encodeQueryParameters(Map<String, String> params) {
+                                return params.entries
+                                    .map((MapEntry<String, String> e) =>
+                                '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+                                    .join('&');
+                              }
+                              final Uri emailUri = Uri(
+                                scheme: "mailto",
+                                path: specialist.contact_email.toString(),
+                                query: encodeQueryParameters(<String, String>{
+                                  "subject": "I have a query respect my plant",
+                                }),
+                              );
+                              if(await canLaunchUrl(emailUri)){
+                                launchUrl(emailUri);
+                              } else {
+                                throw Exception("Couldn't launch $emailUri");
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              foregroundColor: Colors.white,
+                              backgroundColor: Colors.orange,
+                            ),
+                            child: const Text('Send Email', style: TextStyle(fontSize: 18))
                           ),
                         ),
                       )

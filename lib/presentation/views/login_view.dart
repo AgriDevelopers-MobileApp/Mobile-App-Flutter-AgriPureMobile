@@ -3,6 +3,7 @@ import 'package:agripure_mobile/presentation/screens/home_screen.dart';
 import 'package:agripure_mobile/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -18,6 +19,23 @@ class _LoginViewState extends State<LoginView> {
   bool _isLoading = false;
   bool remember = false;
 
+  void InitializeVar() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String user = prefs.getString("user")??"";
+    String pass = prefs.getString("pass")??"";
+    setState(() {
+      remember = prefs.getBool("rem")??false;
+    });
+    _usernameController.text = user;
+    _passwordController.text = pass;
+  }
+
+  @override
+  void initState() {
+    InitializeVar();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,6 +45,7 @@ class _LoginViewState extends State<LoginView> {
             padding: const EdgeInsets.only(left: 40, right: 40),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
                   padding: const EdgeInsets.only(bottom: 10.0),
@@ -55,7 +74,7 @@ class _LoginViewState extends State<LoginView> {
                 ),
 
                 SizedBox(
-                  height: 15,
+                  height: 20,
                 ),
 
                 Padding(
@@ -91,10 +110,20 @@ class _LoginViewState extends State<LoginView> {
                     children: [
                       Checkbox(
                         value: remember,
-                        onChanged: (value) {
+                        onChanged: (value) async {
+                          SharedPreferences prefs = await SharedPreferences.getInstance();
                           setState(() {
                             remember = value!;
-                          });},
+                          });
+                          if(remember){
+                            prefs.setString("user", _usernameController.text);
+                            prefs.setString("pass", _passwordController.text);
+                            prefs.setBool("rem", remember);
+                          } else {
+                            prefs.remove("user");
+                            prefs.remove("pass");
+                            prefs.setBool("rem", remember);
+                          }},
                         checkColor: Colors.white,
                         activeColor: const Color.fromRGBO(47, 152, 48, 1.0),
                       ),
@@ -105,7 +134,7 @@ class _LoginViewState extends State<LoginView> {
                 ),
 
                 SizedBox(
-                  height: 8,
+                  height: 10,
                 ),
 
                 Row(
@@ -113,7 +142,7 @@ class _LoginViewState extends State<LoginView> {
                     Expanded(
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(backgroundColor: const Color.fromRGBO(47, 152, 48, 1.0)),
-                          onPressed: (){
+                          onPressed: () {
                             setState(() {
                               _isLoading = true;
                             });
@@ -149,118 +178,6 @@ class _LoginViewState extends State<LoginView> {
                                 ) : Padding(
                             padding: const EdgeInsets.all(10),
                             child: Text("Log in", style: TextStyle(color: Colors.white, fontSize: 20)),
-                          ),
-                        )
-                    ),
-                  ],
-                ),
-
-                SizedBox(
-                  height: 8,
-                ),
-
-                Center(
-                  child: Text("or with",
-                    style: TextStyle(
-                        color: const Color.fromRGBO(100, 100, 100, 1.0),
-                        fontSize: 15
-                    ),
-                  ),
-                ),
-
-                SizedBox(
-                  height: 15,
-                ),
-
-                Row(
-                  children: [
-                    Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 20, right: 20),
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(backgroundColor: const Color.fromRGBO(40, 58, 176, 1.0)),
-                            onPressed: (){},
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Container(
-                                  width: 80,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(10),
-                                    child: Icon(Icons.facebook, color: Colors.white,),
-                                  ),
-                                ),
-
-                                Text("Facebook", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),)
-                              ],
-                            ),
-                          ),
-                        )
-                    ),
-                  ],
-                ),
-
-                SizedBox(
-                  height: 15,
-                ),
-
-                Row(
-                  children: [
-                    Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 20, right: 20),
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(backgroundColor: const Color.fromRGBO(
-                                19, 19, 19, 1.0)),
-                            onPressed: (){},
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Container(
-                                  width: 80,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(10),
-                                    child: Icon(Icons.apple, color: Colors.white,),
-                                  ),
-                                ),
-
-                                Text("Apple", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),)
-                              ],
-                            ),
-                          ),
-                        )
-                    ),
-                  ],
-                ),
-
-                SizedBox(
-                  height: 15,
-                ),
-
-                Row(
-                  children: [
-                    Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 20, right: 20),
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(backgroundColor: const Color.fromRGBO(
-                                255, 0, 0, 1.0)),
-                            onPressed: (){},
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Container(
-                                  width: 80,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(10),
-                                    child: Icon(Icons.g_mobiledata, color: Colors.white, size: 30,),
-                                  ),
-                                ),
-
-                                Text("Gmail", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),)
-                              ],
-                            ),
                           ),
                         )
                     ),
