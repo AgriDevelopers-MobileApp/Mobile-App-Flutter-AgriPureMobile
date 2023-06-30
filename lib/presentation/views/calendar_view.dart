@@ -42,7 +42,6 @@ class _CalendarViewState extends State<CalendarView> {
     events = {};
     EventService.getEvents().then((value) =>{
       events = value,
-      print(events)
     });
   }
 
@@ -115,7 +114,6 @@ class _CalendarViewState extends State<CalendarView> {
                     onDismissed: (direction){
                       setState(() {
                         events[DateFormat("yyyy-MM-dd").format(selectedDay)]?.removeWhere((element) => element.id == myEvents.id);
-                        print(myEvents.id);
                         EventService.deleteEvent(myEvents.id);
                       });
                     },
