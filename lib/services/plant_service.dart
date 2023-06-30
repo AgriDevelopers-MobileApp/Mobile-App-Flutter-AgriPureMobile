@@ -93,7 +93,7 @@ class PlantService {
         return Future.error('Request error: ${response.statusCode}');
       }
     } catch (error) {
-      return Future.error('Error on connectivity: ${error}');
+      return Future.error('Error on connectivity: $error');
     }
   }
 

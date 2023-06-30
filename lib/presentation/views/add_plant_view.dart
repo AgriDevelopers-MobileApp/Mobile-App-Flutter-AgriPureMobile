@@ -13,6 +13,7 @@ class AddPlantView extends StatefulWidget {
 class _AddPlantViewState extends State<AddPlantView> {
 
   bool _isLoading = false;
+  String searchText = '';
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +59,13 @@ class _AddPlantViewState extends State<AddPlantView> {
                   child: TextField(
                     decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: "Ingrese planta a buscar"
+                        hintText: "Search a plant"
                     ),
+                    onChanged: (value) {
+                      setState(() {
+                        searchText = value;
+                      });
+                    },
                   ),
                 ),
               ),
@@ -73,9 +79,11 @@ class _AddPlantViewState extends State<AddPlantView> {
                 initialData: [],
                 future:  PlantService.getPlants(),
                 builder: (context, AsyncSnapshot<List> snapshot){
+                  List filteredPlants = snapshot.data!.where((plant) =>
+                      plant.name.toLowerCase().contains(searchText.toLowerCase())).toList();
                   if (snapshot.data!.isEmpty) {
-                    return Padding(
-                      padding: const EdgeInsets.all(20.0),
+                    return const Padding(
+                      padding: EdgeInsets.all(20.0),
                       child: Center(
                         child: Text("All plants selected", style: TextStyle(
                           fontSize: 18,
@@ -86,11 +94,24 @@ class _AddPlantViewState extends State<AddPlantView> {
                     ),
                   );
                   } else {
-                    return Expanded(
+                    if (filteredPlants.isEmpty) {
+                      return const Padding(
+                          padding: EdgeInsets.all(20.0),
+                          child: Center(
+                            child: Text("Plant not found", style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                            ),
+                          ),
+                        );
+                    } else {
+                      return Expanded(
                       child: ListView.builder(
-                          itemCount: snapshot.data!.length,
+                          itemCount: filteredPlants.length,
                           itemBuilder: (context, index) {
-                            var plant = snapshot.data![index];
+                            var plant = filteredPlants[index];
 
                             return Padding(
                               padding: const EdgeInsets.all(20.0),
@@ -113,17 +134,17 @@ class _AddPlantViewState extends State<AddPlantView> {
                                               fit: BoxFit.cover,)
                                         ),
 
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 10,
                                         ),
 
-                                        Text("${plant.name}", style: TextStyle(
+                                        Text("${plant.name}", style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 28,
                                             fontWeight: FontWeight.bold
                                         ),),
 
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 10,
                                         ),
 
@@ -168,13 +189,13 @@ class _AddPlantViewState extends State<AddPlantView> {
                                                     ? Container(
                                                     height: 20,
                                                     width: 20,
-                                                    child: CircularProgressIndicator(
+                                                    child: const CircularProgressIndicator(
                                                       valueColor: AlwaysStoppedAnimation<
                                                           Color>(Colors.white),
                                                       strokeWidth: 3.0,
                                                     )
-                                                ) : Padding(
-                                                  padding: const EdgeInsets.all(
+                                                ) : const Padding(
+                                                  padding: EdgeInsets.all(
                                                       12.0),
                                                   child: Text(
                                                     "Add", style: TextStyle(
@@ -195,6 +216,7 @@ class _AddPlantViewState extends State<AddPlantView> {
                             );
                           }),
                     );
+                    }
                   }
                 }
             )
